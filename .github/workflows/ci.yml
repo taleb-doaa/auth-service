@@ -1,0 +1,51 @@
+name : Node Auth CI
+# Or whatever name you want , idc
+n :
+push :
+branches : [" main "]
+pull_request :
+jobs :
+test :
+runs - on : ubuntu - latest
+strategy :
+matrix :
+node - version : [18 , 20]
+services :
+mongo :
+image : mongo :6
+ports :
+- 27017:27017
+env :
+MONGO_URI : mongodb :// localhost :27017/ testdb
+steps :
+- uses : actions / checkout@v4
+- name : Setup Node
+uses : actions / setup - node@v4
+with :
+node - version : $ {{ matrix [ ’ node - version ’] }}
+cache : npm
+- name : Cache node modules
+uses : actions / cache@v3
+with :
+path : node_modules
+key : $ {{ runner . os }} - node - $ {{ hashFiles ( ’ package - lock . json ’)
+}}
+restore - keys : |
+$ {{ runner . os }} - node -
+- name : Install
+run : npm ci
+- name : Lint code
+run : npm run lint
+- name : Format code
+run : npm run format
+- name : Run tests
+run : npm test
+- name : Upload coverage report
+if : always ()
+uses : actions / upload - artifact@v4
+with :
+name : coverage - report - $ {{ matrix . node - version }}
+path : coverage /
+git add . github / workflows / ci . yml
+git commit -m " Ajout du workflow CI "
+git push origin main

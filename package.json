@@ -1,0 +1,34 @@
+{
+  "name": "auth-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "dev": "nodemon src/index.js",
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.20.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.11",
+    "prettier": "^3.6.2",
+    "supertest": "^7.1.4"
+  }
+}
